@@ -1,8 +1,9 @@
 import { existsSync } from 'node:fs'
 import { dirname, isAbsolute, relative, resolve } from 'node:path'
 
-import type { Element, Root } from 'hast'
+import type { Root } from 'hast'
 import slash from 'slash'
+import { visit } from 'unist-util-visit'
 import type { VFile } from 'vfile'
 
 export interface Options {
@@ -27,13 +28,6 @@ function splitHref(href: string): [path: string, suffix: string] {
   return [decodeURI(href.slice(0, idx)), href.slice(idx)]
 }
 
-function visit(node: Root | Element, fn: (el: Element) => void) {
-  if (node.type === 'element') fn(node)
-  for (const child of node.children) {
-    if (child.type === 'element') visit(child, fn)
-  }
-}
-
 export function rehypeResolveMarkdownLinks(
   options: Options,
 ): (tree: Root, file: VFile) => void {
@@ -46,6 +40,7 @@ export function rehypeResolveMarkdownLinks(
     const currentDir = dirname(currentFile)
 
     visit(tree, (node) => {
+      if (node.type !== 'element') return
       if (node.tagName !== 'a') return
 
       const href = node.properties?.href
