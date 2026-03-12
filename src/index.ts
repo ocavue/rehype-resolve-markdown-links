@@ -57,7 +57,7 @@ export function rehypeResolveMarkdownLinks(
       const targetAbsPath = resolve(currentDir, filePath)
       if (!existsSync(targetAbsPath)) {
         throw new Error(
-          `Link target not found: ${targetAbsPath} (from ${currentFile})`,
+          `[rehype-resolve-markdown-links] Link target not found: ${targetAbsPath} (from ${currentFile})`,
         )
       }
 
