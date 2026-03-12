@@ -11,7 +11,7 @@ Given this file structure:
 ```
 content/
   getting-started/
-    intro.md
+    intro.mdx
     quick-start.md
   references/
     core.md
@@ -27,7 +27,7 @@ And this configuration with `rootDir: './content'`:
 | -------------------------------- | -------------------------------- | ------------------------------------------------- |
 | `references/react/button.md`     | `[Web Button](../web/button.md)` | `<a href="/references/web/button">Web Button</a>` |
 | `references/react/button.md`     | `[Editor](../core.md#editor)`    | `<a href="/references/core#editor">Editor</a>`    |
-| `getting-started/quick-start.md` | `[Intro](./intro.md)`            | `<a href="/getting-started/intro">Intro</a>`      |
+| `getting-started/quick-start.md` | `[Intro](./intro.mdx)`           | `<a href="/getting-started/intro">Intro</a>`      |
 
 ## Install
 

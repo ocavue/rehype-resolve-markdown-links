@@ -64,7 +64,7 @@ describe('rehypeResolveMarkdownLinks', () => {
   describe('preserves query and fragment', () => {
     it('preserves a hash fragment', () => {
       const result = process(
-        '[Intro](../intro.md#section)',
+        '[Intro](../intro.mdx#section)',
         fileIn('getting-started/quick-start.md'),
       )
       expect(result).toBe('<p><a href="/intro#section">Intro</a></p>')
@@ -72,7 +72,7 @@ describe('rehypeResolveMarkdownLinks', () => {
 
     it('preserves a query string', () => {
       const result = process(
-        '[Intro](../intro.md?foo=bar)',
+        '[Intro](../intro.mdx?foo=bar)',
         fileIn('getting-started/quick-start.md'),
       )
       expect(result).toBe('<p><a href="/intro?foo=bar">Intro</a></p>')
@@ -80,7 +80,7 @@ describe('rehypeResolveMarkdownLinks', () => {
 
     it('preserves both query string and hash fragment', () => {
       const result = process(
-        '[Intro](../intro.md?a=1#b)',
+        '[Intro](../intro.mdx?a=1#b)',
         fileIn('getting-started/quick-start.md'),
       )
       expect(result).toBe('<p><a href="/intro?a=1#b">Intro</a></p>')
@@ -91,7 +91,7 @@ describe('rehypeResolveMarkdownLinks', () => {
     it('skips absolute URLs', () => {
       const result = process(
         '[Link](https://example.com/page.md)',
-        fileIn('intro.md'),
+        fileIn('intro.mdx'),
       )
       expect(result).toBe(
         '<p><a href="https://example.com/page.md">Link</a></p>',
@@ -99,17 +99,17 @@ describe('rehypeResolveMarkdownLinks', () => {
     })
 
     it('skips absolute file paths', () => {
-      const result = process('[Link](/absolute/page.md)', fileIn('intro.md'))
+      const result = process('[Link](/absolute/page.md)', fileIn('intro.mdx'))
       expect(result).toBe('<p><a href="/absolute/page.md">Link</a></p>')
     })
 
     it('skips non-markdown links', () => {
-      const result = process('[Link](./page.html)', fileIn('intro.md'))
+      const result = process('[Link](./page.html)', fileIn('intro.mdx'))
       expect(result).toBe('<p><a href="./page.html">Link</a></p>')
     })
 
     it('skips fragment-only links', () => {
-      const result = process('[Link](#section)', fileIn('intro.md'))
+      const result = process('[Link](#section)', fileIn('intro.mdx'))
       expect(result).toBe('<p><a href="#section">Link</a></p>')
     })
   })
@@ -117,7 +117,7 @@ describe('rehypeResolveMarkdownLinks', () => {
   describe('error handling', () => {
     it('throws when the target file does not exist', () => {
       expect(() =>
-        process('[Link](./nonexistent.md)', fileIn('intro.md')),
+        process('[Link](./nonexistent.md)', fileIn('intro.mdx')),
       ).toThrow(/Link target not found/)
     })
   })
@@ -126,7 +126,7 @@ describe('rehypeResolveMarkdownLinks', () => {
     it('decodes percent-encoded paths', () => {
       const result = process(
         '[Link](./getting-started/quick-start.md)',
-        fileIn('intro.md'),
+        fileIn('intro.mdx'),
       )
       expect(result).toBe(
         '<p><a href="/getting-started/quick-start">Link</a></p>',
@@ -141,8 +141,8 @@ describe('rehypeResolveMarkdownLinks', () => {
         .use(remarkRehype)
         .use(rehypeResolveMarkdownLinks, { rootDir })
         .use(rehypeStringify)
-        .processSync({ value: '[Link](./intro.md)', history: [] })
-      expect(String(file)).toBe('<p><a href="./intro.md">Link</a></p>')
+        .processSync({ value: '[Link](./intro.mdx)', history: [] })
+      expect(String(file)).toBe('<p><a href="./intro.mdx">Link</a></p>')
     })
   })
 })
