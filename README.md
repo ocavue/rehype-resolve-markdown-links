@@ -23,11 +23,11 @@ content/
 
 And this configuration with `rootDir: './content'`:
 
-| Source file                      | Link in source      | Output                    |
-| -------------------------------- | ------------------- | ------------------------- |
-| `references/react/button.md`     | `../web/button.md`  | `/references/web/button`  |
-| `references/react/button.md`     | `../core.md#editor` | `/references/core#editor` |
-| `getting-started/quick-start.md` | `./intro.md`        | `/getting-started/intro`  |
+| Source file                      | Markdown                         | HTML output                                       |
+| -------------------------------- | -------------------------------- | ------------------------------------------------- |
+| `references/react/button.md`     | `[Web Button](../web/button.md)` | `<a href="/references/web/button">Web Button</a>` |
+| `references/react/button.md`     | `[Editor](../core.md#editor)`    | `<a href="/references/core#editor">Editor</a>`    |
+| `getting-started/quick-start.md` | `[Intro](./intro.md)`            | `<a href="/getting-started/intro">Intro</a>`      |
 
 ## Install
 
@@ -37,34 +37,19 @@ npm install rehype-resolve-markdown-links
 
 ## Usage
 
-### With Astro
-
 ```js
-// astro.config.mjs
-import { rehypeResolveMarkdownLinks } from 'rehype-resolve-markdown-links'
-
-export default {
-  markdown: {
-    rehypePlugins: [
-      [rehypeResolveMarkdownLinks, { rootDir: './src/content/docs' }],
-    ],
-  },
-}
-```
-
-### With unified
-
-```js
-import rehypeParse from 'rehype-parse'
 import { rehypeResolveMarkdownLinks } from 'rehype-resolve-markdown-links'
 import rehypeStringify from 'rehype-stringify'
+import remarkParse from 'remark-parse'
+import remarkRehype from 'remark-rehype'
 import { unified } from 'unified'
 
 const file = await unified()
-  .use(rehypeParse)
+  .use(remarkParse)
+  .use(remarkRehype)
   .use(rehypeResolveMarkdownLinks, { rootDir: './content' })
   .use(rehypeStringify)
-  .process(html)
+  .process(markdown)
 ```
 
 ## Options

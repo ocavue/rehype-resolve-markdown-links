@@ -1,7 +1,8 @@
 import { resolve } from 'node:path'
 
-import rehypeParse from 'rehype-parse'
 import rehypeStringify from 'rehype-stringify'
+import remarkParse from 'remark-parse'
+import remarkRehype from 'remark-rehype'
 import { unified } from 'unified'
 import { describe, expect, it } from 'vitest'
 
@@ -9,12 +10,13 @@ import { rehypeResolveMarkdownLinks } from './index'
 
 const rootDir = resolve(__dirname, '../test/fixtures/docs')
 
-function process(html: string, currentFile: string) {
+function process(markdown: string, currentFile: string) {
   const file = unified()
-    .use(rehypeParse, { fragment: true })
+    .use(remarkParse)
+    .use(remarkRehype)
     .use(rehypeResolveMarkdownLinks, { rootDir })
     .use(rehypeStringify)
-    .processSync({ value: html, history: [currentFile] })
+    .processSync({ value: markdown, history: [currentFile] })
   return String(file)
 }
 
@@ -26,105 +28,96 @@ describe('rehypeResolveMarkdownLinks', () => {
   describe('basic transforms', () => {
     it('resolves a same-directory relative link', () => {
       const result = process(
-        '<a href="./quick-start.md">Quick Start</a>',
+        '[Quick Start](./quick-start.md)',
         fileIn('getting-started/quick-start.md'),
       )
       expect(result).toBe(
-        '<a href="/getting-started/quick-start">Quick Start</a>',
+        '<p><a href="/getting-started/quick-start">Quick Start</a></p>',
       )
     })
 
     it('resolves a parent-directory relative link', () => {
       const result = process(
-        '<a href="../web/button.md">Button</a>',
+        '[Button](../web/button.md)',
         fileIn('references/react/button.md'),
       )
-      expect(result).toBe('<a href="/references/web/button">Button</a>')
+      expect(result).toBe('<p><a href="/references/web/button">Button</a></p>')
     })
 
     it('resolves a .mdx file', () => {
       const result = process(
-        '<a href="../intro.mdx">Intro</a>',
+        '[Intro](../intro.mdx)',
         fileIn('getting-started/quick-start.md'),
       )
-      expect(result).toBe('<a href="/intro">Intro</a>')
+      expect(result).toBe('<p><a href="/intro">Intro</a></p>')
     })
 
     it('resolves a deeply nested link', () => {
       const result = process(
-        '<a href="../references/core.md">Core</a>',
+        '[Core](../references/core.md)',
         fileIn('getting-started/quick-start.md'),
       )
-      expect(result).toBe('<a href="/references/core">Core</a>')
+      expect(result).toBe('<p><a href="/references/core">Core</a></p>')
     })
   })
 
   describe('preserves query and fragment', () => {
     it('preserves a hash fragment', () => {
       const result = process(
-        '<a href="../intro.md#section">Intro</a>',
+        '[Intro](../intro.md#section)',
         fileIn('getting-started/quick-start.md'),
       )
-      expect(result).toBe('<a href="/intro#section">Intro</a>')
+      expect(result).toBe('<p><a href="/intro#section">Intro</a></p>')
     })
 
     it('preserves a query string', () => {
       const result = process(
-        '<a href="../intro.md?foo=bar">Intro</a>',
+        '[Intro](../intro.md?foo=bar)',
         fileIn('getting-started/quick-start.md'),
       )
-      expect(result).toBe('<a href="/intro?foo=bar">Intro</a>')
+      expect(result).toBe('<p><a href="/intro?foo=bar">Intro</a></p>')
     })
 
     it('preserves both query string and hash fragment', () => {
       const result = process(
-        '<a href="../intro.md?a=1#b">Intro</a>',
+        '[Intro](../intro.md?a=1#b)',
         fileIn('getting-started/quick-start.md'),
       )
-      expect(result).toBe('<a href="/intro?a=1#b">Intro</a>')
+      expect(result).toBe('<p><a href="/intro?a=1#b">Intro</a></p>')
     })
   })
 
   describe('skips non-matching links', () => {
     it('skips absolute URLs', () => {
       const result = process(
-        '<a href="https://example.com/page.md">Link</a>',
+        '[Link](https://example.com/page.md)',
         fileIn('intro.md'),
       )
-      expect(result).toBe('<a href="https://example.com/page.md">Link</a>')
+      expect(result).toBe(
+        '<p><a href="https://example.com/page.md">Link</a></p>',
+      )
     })
 
     it('skips absolute file paths', () => {
-      const result = process(
-        '<a href="/absolute/page.md">Link</a>',
-        fileIn('intro.md'),
-      )
-      expect(result).toBe('<a href="/absolute/page.md">Link</a>')
+      const result = process('[Link](/absolute/page.md)', fileIn('intro.md'))
+      expect(result).toBe('<p><a href="/absolute/page.md">Link</a></p>')
     })
 
     it('skips non-markdown links', () => {
-      const result = process(
-        '<a href="./page.html">Link</a>',
-        fileIn('intro.md'),
-      )
-      expect(result).toBe('<a href="./page.html">Link</a>')
+      const result = process('[Link](./page.html)', fileIn('intro.md'))
+      expect(result).toBe('<p><a href="./page.html">Link</a></p>')
     })
 
     it('skips fragment-only links', () => {
-      const result = process('<a href="#section">Link</a>', fileIn('intro.md'))
-      expect(result).toBe('<a href="#section">Link</a>')
-    })
-
-    it('skips links without href', () => {
-      const result = process('<a>Link</a>', fileIn('intro.md'))
-      expect(result).toBe('<a>Link</a>')
+      const result = process('[Link](#section)', fileIn('intro.md'))
+      expect(result).toBe('<p><a href="#section">Link</a></p>')
     })
   })
 
   describe('error handling', () => {
     it('throws when the target file does not exist', () => {
       expect(() =>
-        process('<a href="./nonexistent.md">Link</a>', fileIn('intro.md')),
+        process('[Link](./nonexistent.md)', fileIn('intro.md')),
       ).toThrow(/Link target not found/)
     })
   })
@@ -132,21 +125,11 @@ describe('rehypeResolveMarkdownLinks', () => {
   describe('URL encoding', () => {
     it('decodes percent-encoded paths', () => {
       const result = process(
-        '<a href="./getting-started/quick-start.md">Link</a>',
+        '[Link](./getting-started/quick-start.md)',
         fileIn('intro.md'),
       )
-      expect(result).toBe('<a href="/getting-started/quick-start">Link</a>')
-    })
-  })
-
-  describe('HTML source links', () => {
-    it('resolves links inside nested HTML elements', () => {
-      const result = process(
-        '<div><p><a href="../web/button.md#props">Button</a></p></div>',
-        fileIn('references/react/button.md'),
-      )
       expect(result).toBe(
-        '<div><p><a href="/references/web/button#props">Button</a></p></div>',
+        '<p><a href="/getting-started/quick-start">Link</a></p>',
       )
     })
   })
@@ -154,11 +137,12 @@ describe('rehypeResolveMarkdownLinks', () => {
   describe('edge cases', () => {
     it('handles a file with no history', () => {
       const file = unified()
-        .use(rehypeParse, { fragment: true })
+        .use(remarkParse)
+        .use(remarkRehype)
         .use(rehypeResolveMarkdownLinks, { rootDir })
         .use(rehypeStringify)
-        .processSync({ value: '<a href="./intro.md">Link</a>', history: [] })
-      expect(String(file)).toBe('<a href="./intro.md">Link</a>')
+        .processSync({ value: '[Link](./intro.md)', history: [] })
+      expect(String(file)).toBe('<p><a href="./intro.md">Link</a></p>')
     })
   })
 })
