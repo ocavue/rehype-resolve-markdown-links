@@ -60,7 +60,7 @@
     "rehype-stringify": "^10.0.0",
     "remark-parse": "^11.0.0",
     "remark-rehype": "^11.0.0",
-    "tsdown": "^0.21.0",
+    "tsdown": "^0.21.2",
     "typescript": "^5.9.3",
     "unified": "^11.0.5",
     "vite": "^7.3.1",
