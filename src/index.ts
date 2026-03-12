@@ -7,15 +7,17 @@ import type { VFile } from 'vfile'
 
 export interface Options {
   /**
-   * Root directory of the content files. Relative paths are resolved against
-   * cwd.
+   * Root directory of the content files. Output links are generated relative to this directory.
    */
   rootDir: string
 }
 
 function isRelativeMdLink(href: string): boolean {
+  // Absolute URL (http://, https://, file://, etc.)
   if (/^[a-z][\d+.a-z-]*:/i.test(href)) return false
+  // Absolute file path
   if (isAbsolute(href)) return false
+  // Must have .md or .mdx extension
   return /\.mdx?$/i.test(href)
 }
 
@@ -32,7 +34,9 @@ function visit(node: Root | Element, fn: (el: Element) => void) {
   }
 }
 
-export function rehypeResolveMarkdownLinks(options: Options) {
+export function rehypeResolveMarkdownLinks(
+  options: Options,
+): (tree: Root, file: VFile) => void {
   const rootDir = resolve(options.rootDir)
 
   return (tree: Root, file: VFile) => {
