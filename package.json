@@ -1,0 +1,58 @@
+{
+  "name": "rehype-resolve-markdown-links",
+  "type": "module",
+  "version": "0.0.0",
+  "packageManager": "pnpm@10.30.3",
+  "description": "A rehype plugin to resolve markdown links to absolute paths",
+  "author": "ocavue <ocavue@gmail.com>",
+  "license": "MIT",
+  "funding": "https://github.com/sponsors/ocavue",
+  "homepage": "https://github.com/ocavue/rehype-resolve-markdown-links#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ocavue/rehype-resolve-markdown-links.git"
+  },
+  "bugs": "https://github.com/ocavue/rehype-resolve-markdown-links/issues",
+  "keywords": [],
+  "sideEffects": false,
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "typesVersions": {
+    "*": {
+      "*": [
+        "./dist/*",
+        "./dist/index.d.ts"
+      ]
+    }
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "scripts": {
+    "build": "tsdown",
+    "dev": "tsdown --watch",
+    "lint": "eslint .",
+    "fix": "eslint --fix . && prettier --write .",
+    "test": "vitest",
+    "typecheck": "tsc -b"
+  },
+  "devDependencies": {
+    "@ocavue/eslint-config": "^4.2.0",
+    "@ocavue/tsconfig": "^0.6.3",
+    "@types/node": "^22.19.11",
+    "eslint": "^10.0.2",
+    "prettier": "^3.8.1",
+    "tsdown": "^0.20.3",
+    "typescript": "^5.9.3",
+    "vite": "^7.3.1",
+    "vitest": "^4.0.18"
+  }
+}
