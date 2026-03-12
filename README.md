@@ -2,7 +2,32 @@
 
 [![NPM version](https://img.shields.io/npm/v/rehype-resolve-markdown-links?color=a1b858&label=)](https://www.npmjs.com/package/rehype-resolve-markdown-links)
 
-A [rehype](https://github.com/rehypejs/rehype) plugin that resolves relative markdown links (e.g. `./other-page.md`) into absolute URL paths (e.g. `/other-page`).
+A [rehype](https://github.com/rehypejs/rehype) plugin that resolves relative markdown links into absolute URL paths.
+
+## Example
+
+Given this file structure:
+
+```
+content/
+  getting-started/
+    intro.md
+    quick-start.md
+  references/
+    core.md
+    react/
+      button.md
+    web/
+      button.md
+```
+
+And this configuration with `rootDir: './content'`:
+
+| Source file                      | Link in source      | Output                    |
+| -------------------------------- | ------------------- | ------------------------- |
+| `references/react/button.md`     | `../web/button.md`  | `/references/web/button`  |
+| `references/react/button.md`     | `../core.md#editor` | `/references/core#editor` |
+| `getting-started/quick-start.md` | `./intro.md`        | `/getting-started/intro`  |
 
 ## Install
 
@@ -11,6 +36,23 @@ npm install rehype-resolve-markdown-links
 ```
 
 ## Usage
+
+### With Astro
+
+```js
+// astro.config.mjs
+import { rehypeResolveMarkdownLinks } from 'rehype-resolve-markdown-links'
+
+export default {
+  markdown: {
+    rehypePlugins: [
+      [rehypeResolveMarkdownLinks, { rootDir: './src/content/docs' }],
+    ],
+  },
+}
+```
+
+### With unified
 
 ```js
 import rehypeParse from 'rehype-parse'
@@ -29,20 +71,7 @@ const file = await unified()
 
 ### `rootDir`
 
-**Required.** The root directory of your content files.
-
-The plugin computes each link's final URL by resolving the relative file path, then making it relative to `rootDir`, and stripping the `.md`/`.mdx` extension.
-
-For example, given `rootDir: './src/content/docs'` and a link `../core.md#editor` in `src/content/docs/references/react/button.md`, the output would be `/references/core#editor`.
-
-## Behavior
-
-
-**Skips:**
-
-- Absolute URLs (`https://example.com/page.md`)
-- Absolute file paths (`/page.md`)
-- Non-markdown links (`./page.html`, `#section`)
+**Required.** The root directory of your content files. Output links are generated relative to this directory.
 
 ## License
 
