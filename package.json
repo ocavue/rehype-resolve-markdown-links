@@ -1,7 +1,7 @@
 {
   "name": "rehype-resolve-markdown-links",
   "type": "module",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "packageManager": "pnpm@10.30.3",
   "description": "A rehype plugin to resolve markdown links to absolute paths",
   "author": "ocavue <ocavue@gmail.com>",
