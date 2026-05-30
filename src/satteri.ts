@@ -18,7 +18,7 @@ export function satteriResolveMarkdownLinks(
 ): HastPluginDefinition {
   const rootDir = resolve(options.rootDir)
 
-  return defineHastPlugin({
+  const plugin: HastPluginDefinition = ({
     name: 'satteri-resolve-markdown-links',
     element: {
       filter: ['a'],
@@ -45,4 +45,6 @@ export function satteriResolveMarkdownLinks(
       },
     },
   })
+
+  return plugin
 }
