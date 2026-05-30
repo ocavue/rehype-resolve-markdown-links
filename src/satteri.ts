@@ -1,7 +1,7 @@
 import { existsSync } from 'node:fs'
 import { dirname, relative, resolve } from 'node:path'
 
-import { defineHastPlugin, type HastPluginDefinition } from 'satteri'
+import type { HastPluginDefinition } from 'satteri'
 import slash from 'slash'
 
 import { isRelativeMdLink, splitHref } from './utils'
@@ -18,7 +18,7 @@ export function satteriResolveMarkdownLinks(
 ): HastPluginDefinition {
   const rootDir = resolve(options.rootDir)
 
-  const plugin: HastPluginDefinition = ({
+  const plugin: HastPluginDefinition = {
     name: 'satteri-resolve-markdown-links',
     element: {
       filter: ['a'],
@@ -29,7 +29,16 @@ export function satteriResolveMarkdownLinks(
         const [filePath, suffix] = splitHref(href)
         if (!isRelativeMdLink(filePath)) return
 
-        const currentDir = dirname(ctx.filename)
+        console.log("ctx.filename", ctx.filename)
+
+        const currentFile = ctx.filename
+
+        // satteri defaults to "<unknown>" when no filename is provided
+        // https://github.com/bruits/satteri/blob/8d84807fe572950f47f0017f68a3b753dd9e90c3/packages/satteri/src/compile.ts#L494
+        if (!currentFile || currentFile === "<unknown>") return
+
+
+        const currentDir = dirname(currentFile)
 
         const targetAbsPath = resolve(currentDir, filePath)
         if (!existsSync(targetAbsPath)) {
@@ -44,7 +53,7 @@ export function satteriResolveMarkdownLinks(
         ctx.setProperty(node, 'href', '/' + slash(withoutExt) + suffix)
       },
     },
-  })
+  }
 
   return plugin
 }
