@@ -5,19 +5,17 @@ import remarkParse from 'remark-parse'
 import remarkRehype from 'remark-rehype'
 import { unified } from 'unified'
 import { describe, expect, it } from 'vitest'
+import { markdownToHtml } from "satteri";
 
 import { rehypeResolveMarkdownLinks } from './unist'
 
 const rootDir = resolve(__dirname, '../test/fixtures/docs')
 
-function process(markdown: string, currentFile: string) {
-  const file = unified()
-    .use(remarkParse)
-    .use(remarkRehype)
-    .use(rehypeResolveMarkdownLinks, { rootDir })
-    .use(rehypeStringify)
-    .processSync({ value: markdown, history: [currentFile] })
-  return String(file)
+function process(markdown: string, filePath: string | undefined) {
+  const result = markdownToHtml(markdown, {
+    filename: filePath,
+  })
+  return result.html
 }
 
 function fileIn(relativePath: string) {
@@ -136,13 +134,11 @@ describe('rehypeResolveMarkdownLinks', () => {
 
   describe('edge cases', () => {
     it('handles a file with no history', () => {
-      const file = unified()
-        .use(remarkParse)
-        .use(remarkRehype)
-        .use(rehypeResolveMarkdownLinks, { rootDir })
-        .use(rehypeStringify)
-        .processSync({ value: '[Link](./intro.mdx)', history: [] })
-      expect(String(file)).toBe('<p><a href="./intro.mdx">Link</a></p>')
+      const result = process(
+        '[Link](./intro.mdx)',
+        undefined,
+      )
+      expect(result).toBe('<p><a href="./intro.mdx">Link</a></p>')
     })
   })
 })
