@@ -13,7 +13,7 @@ const rootDir = resolve(__dirname, '../test/fixtures/docs')
 type Process = (options: {
   markdown: string
   filePath: string | undefined
-}) => string
+}) => string | Promise<string>
 
 const process: Process = ({ markdown, filePath }) => {
   const file = unified()
