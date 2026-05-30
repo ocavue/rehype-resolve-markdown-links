@@ -25,6 +25,22 @@ const process: Process = (markdown, filePath) => {
   return String(file)
 }
 
+type Process_V2 = (options: { markdown: string, filePath: string | undefined }) => string
+
+const process_v2: Process_V2 = ({ markdown, filePath }) => {
+  const file = unified()
+    .use(remarkParse)
+    .use(remarkRehype)
+    .use(rehypeResolveMarkdownLinks, { rootDir })
+    .use(rehypeStringify)
+    .processSync({
+      value: markdown,
+      history: filePath ? [filePath] : undefined,
+    })
+  return String(file)
+}
+
+
 function fileIn(relativePath: string) {
   return resolve(rootDir, relativePath)
 }
@@ -32,10 +48,9 @@ function fileIn(relativePath: string) {
 describe('rehypeResolveMarkdownLinks', () => {
   describe('basic transforms', () => {
     it('resolves a same-directory relative link', () => {
-      const result = process(
-        '[Quick Start](./quick-start.md)',
-        fileIn('getting-started/quick-start.md'),
-      )
+      const markdown = '[Quick Start](./quick-start.md)';
+      const filePath = resolve(rootDir, 'getting-started/quick-start.md')
+      const result = process_v2({markdown, filePath})
       expect(result).toBe(
         '<p><a href="/getting-started/quick-start">Quick Start</a></p>',
       )
