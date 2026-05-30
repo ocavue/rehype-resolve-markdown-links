@@ -10,7 +10,9 @@ import { rehypeResolveMarkdownLinks } from './unist'
 
 const rootDir = resolve(__dirname, '../test/fixtures/docs')
 
-function process(markdown: string, filePath: string | undefined) {
+type Process = (markdown: string, filePath: string | undefined) => string
+
+const process: Process = (markdown, filePath) => {
   const file = unified()
     .use(remarkParse)
     .use(remarkRehype)
