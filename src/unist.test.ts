@@ -121,7 +121,9 @@ describe('rehypeResolveMarkdownLinks', () => {
       const markdown = '[Link](./nonexistent.md)'
       const filePath = resolve(rootDir, 'intro.mdx')
       await expect(
-        (async () => await process({ markdown, filePath }))(),
+        async () => {
+          await process({ markdown, filePath })
+        },
       ).rejects.toThrow(/Link target not found/)
     })
   })
