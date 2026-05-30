@@ -16,7 +16,10 @@ function process(markdown: string, filePath: string | undefined) {
     .use(remarkRehype)
     .use(rehypeResolveMarkdownLinks, { rootDir })
     .use(rehypeStringify)
-    .processSync({ value: markdown, history: filePath ? [filePath]: undefined })
+    .processSync({
+      value: markdown,
+      history: filePath ? [filePath] : undefined,
+    })
   return String(file)
 }
 
@@ -136,10 +139,7 @@ describe('rehypeResolveMarkdownLinks', () => {
 
   describe('edge cases', () => {
     it('handles a file with no history', () => {
-      const result = process(
-        '[Link](./intro.mdx)',
-        undefined,
-      )
+      const result = process('[Link](./intro.mdx)', undefined)
       expect(result).toBe('<p><a href="./intro.mdx">Link</a></p>')
     })
   })
