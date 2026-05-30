@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.0](https://github.com/ocavue/rehype-resolve-markdown-links/compare/v0.1.0...v0.2.0) (2026-05-30)
+
+
+### Features
+
+* add satteri support ([#11](https://github.com/ocavue/rehype-resolve-markdown-links/issues/11)) ([db3dbc2](https://github.com/ocavue/rehype-resolve-markdown-links/commit/db3dbc201e3766ad04988f3174472177479e894d))
+
 ## 0.1.0 (2026-03-12)
 
 
