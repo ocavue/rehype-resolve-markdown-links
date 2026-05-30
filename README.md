@@ -49,7 +49,18 @@ const file = await unified()
   .use(remarkRehype)
   .use(rehypeResolveMarkdownLinks, { rootDir: './content' })
   .use(rehypeStringify)
-  .process(markdown)
+  .process(markdownString)
+```
+
+## Usage with [Sätteri](https://github.com/bruits/satteri)
+
+```js
+import { satteriResolveMarkdownLinks } from 'rehype-resolve-markdown-links/satteri'
+import { markdownToHtml } from 'satteri'
+
+const result = await markdownToHtml(markdown, {
+  hastPlugins: [satteriResolveMarkdownLinks({ rootDir: './content' })],
+})
 ```
 
 ## Options
@@ -57,6 +68,14 @@ const file = await unified()
 ### `rootDir`
 
 **Required.** The root directory of your content files. Output links are generated relative to this directory.
+
+## Sponsors
+
+<p align="center">
+	<a href="https://github.com/sponsors/ocavue">
+		<img src="https://cdn.jsdelivr.net/gh/ocavue/sponsors/sponsorkit/sponsors.svg" alt="My Sponsors">
+	</a>
+</p>
 
 ## License
 

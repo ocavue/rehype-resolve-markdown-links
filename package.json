@@ -20,16 +20,10 @@
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js"
-    }
-  },
-  "typesVersions": {
-    "*": {
-      "*": [
-        "./dist/*",
-        "./dist/index.d.ts"
-      ]
+      "default": "./dist/index.js"
+    },
+    "./satteri": {
+      "default": "./dist/satteri.js"
     }
   },
   "files": [
@@ -50,6 +44,14 @@
     "unist-util-visit": "^5.1.0",
     "vfile": "^6.0.3"
   },
+  "peerDependencies": {
+    "satteri": "^0.6.3"
+  },
+  "peerDependenciesMeta": {
+    "satteri": {
+      "optional": true
+    }
+  },
   "devDependencies": {
     "@ocavue/eslint-config": "^4.5.9",
     "@ocavue/tsconfig": "^0.7.1",
@@ -60,6 +62,7 @@
     "rehype-stringify": "^10.0.1",
     "remark-parse": "^11.0.0",
     "remark-rehype": "^11.1.2",
+    "satteri": "^0.6.3",
     "tsdown": "^0.22.1",
     "typescript": "^6.0.3",
     "unified": "^11.0.5",
