@@ -117,8 +117,8 @@ describe('rehypeResolveMarkdownLinks', () => {
 
   describe('error handling', () => {
     it('throws when the target file does not exist', () => {
-      expect(() =>
-        process('[Link](./nonexistent.md)', fileIn('intro.mdx')),
+      expect(async () =>
+        await process('[Link](./nonexistent.md)', fileIn('intro.mdx')),
       ).toThrow(/Link target not found/)
     })
   })
