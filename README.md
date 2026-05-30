@@ -69,6 +69,15 @@ const result = await markdownToHtml(markdown, {
 
 **Required.** The root directory of your content files. Output links are generated relative to this directory.
 
+## Sponsors
+
+<p align="center">
+	<a href="https://github.com/sponsors/ocavue">
+		<img src="https://cdn.jsdelivr.net/gh/ocavue/sponsors/sponsorkit/sponsors.svg" alt="My Sponsors">
+	</a>
+</p>
+
+
 ## License
 
 MIT
