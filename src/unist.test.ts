@@ -138,7 +138,7 @@ describe('rehypeResolveMarkdownLinks', () => {
   })
 
   describe('edge cases', () => {
-    it('handles a file with no history', () => {
+    it('handles a file with file path', () => {
       const markdown = '[Link](./intro.mdx)'
       const filePath = undefined
       const result = process({ markdown, filePath })
