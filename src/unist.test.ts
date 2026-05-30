@@ -10,25 +10,12 @@ import { rehypeResolveMarkdownLinks } from './unist'
 
 const rootDir = resolve(__dirname, '../test/fixtures/docs')
 
-type Process = (options: {
+type Processor = (options: {
   markdown: string
   filePath: string | undefined
 }) => string | Promise<string>
 
-const process: Process = ({ markdown, filePath }) => {
-  const file = unified()
-    .use(remarkParse)
-    .use(remarkRehype)
-    .use(rehypeResolveMarkdownLinks, { rootDir })
-    .use(rehypeStringify)
-    .processSync({
-      value: markdown,
-      history: filePath ? [filePath] : undefined,
-    })
-  return String(file)
-}
-
-describe('rehypeResolveMarkdownLinks', () => {
+function testProcessor(process: Processor) {
   describe('basic transforms', () => {
     it('resolves a same-directory relative link', async () => {
       const markdown = '[Quick Start](./quick-start.md)'
@@ -147,4 +134,20 @@ describe('rehypeResolveMarkdownLinks', () => {
       expect(result).toBe('<p><a href="./intro.mdx">Link</a></p>')
     })
   })
+}
+
+describe("unist", () => {
+  const process: Processor = ({ markdown, filePath }) => {
+    const file = unified()
+      .use(remarkParse)
+      .use(remarkRehype)
+      .use(rehypeResolveMarkdownLinks, { rootDir })
+      .use(rehypeStringify)
+      .processSync({
+        value: markdown,
+        history: filePath ? [filePath] : undefined,
+      })
+    return String(file)
+  }
+  testProcessor(process)
 })
