@@ -10,13 +10,13 @@ import { rehypeResolveMarkdownLinks } from './unist'
 
 const rootDir = resolve(__dirname, '../test/fixtures/docs')
 
-function process(markdown: string, currentFile: string) {
+function process(markdown: string, filePath: string | undefined) {
   const file = unified()
     .use(remarkParse)
     .use(remarkRehype)
     .use(rehypeResolveMarkdownLinks, { rootDir })
     .use(rehypeStringify)
-    .processSync({ value: markdown, history: [currentFile] })
+    .processSync({ value: markdown, history: filePath ? [filePath]: undefined })
   return String(file)
 }
 
@@ -136,13 +136,11 @@ describe('rehypeResolveMarkdownLinks', () => {
 
   describe('edge cases', () => {
     it('handles a file with no history', () => {
-      const file = unified()
-        .use(remarkParse)
-        .use(remarkRehype)
-        .use(rehypeResolveMarkdownLinks, { rootDir })
-        .use(rehypeStringify)
-        .processSync({ value: '[Link](./intro.mdx)', history: [] })
-      expect(String(file)).toBe('<p><a href="./intro.mdx">Link</a></p>')
+      const result = process(
+        '[Link](./intro.mdx)',
+        undefined,
+      )
+      expect(result).toBe('<p><a href="./intro.mdx">Link</a></p>')
     })
   })
 })
