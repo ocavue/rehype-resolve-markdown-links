@@ -59,9 +59,9 @@ import { satteriResolveMarkdownLinks } from 'rehype-resolve-markdown-links/satte
 import { markdownToHtml } from 'satteri'
 
 const result = await markdownToHtml(markdown, {
-  hastPlugins: [satteriResolveMarkdownLinks({ rootDir: "./content" })],
+  hastPlugins: [satteriResolveMarkdownLinks({ rootDir: './content' })],
 })
-````
+```
 
 ## Options
 
@@ -76,7 +76,6 @@ const result = await markdownToHtml(markdown, {
 		<img src="https://cdn.jsdelivr.net/gh/ocavue/sponsors/sponsorkit/sponsors.svg" alt="My Sponsors">
 	</a>
 </p>
-
 
 ## License
 
