@@ -6,6 +6,10 @@ import remarkRehype from 'remark-rehype'
 import { unified } from 'unified'
 import { describe, expect, it } from 'vitest'
 
+import { markdownToHtml } from 'satteri'
+
+import { satteriResolveMarkdownLinks } from './satteri'
+
 import { rehypeResolveMarkdownLinks } from './unist'
 
 const rootDir = resolve(__dirname, '../test/fixtures/docs')
@@ -148,6 +152,18 @@ describe("unist", () => {
         history: filePath ? [filePath] : undefined,
       })
     return String(file)
+  }
+  testProcessor(process)
+})
+
+
+describe("satteri", () => {
+  const process: Processor =async ({ markdown, filePath }) => {
+    const result = await markdownToHtml(markdown, {
+      filename: filePath,
+      hastPlugins: [satteriResolveMarkdownLinks({ rootDir })],
+    })
+    return result.html.trimEnd()
   }
   testProcessor(process)
 })
