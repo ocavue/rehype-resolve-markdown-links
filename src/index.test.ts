@@ -3,13 +3,11 @@ import { resolve } from 'node:path'
 import rehypeStringify from 'rehype-stringify'
 import remarkParse from 'remark-parse'
 import remarkRehype from 'remark-rehype'
+import { markdownToHtml } from 'satteri'
 import { unified } from 'unified'
 import { describe, expect, it } from 'vitest'
 
-import { markdownToHtml } from 'satteri'
-
 import { satteriResolveMarkdownLinks } from './satteri'
-
 import { rehypeResolveMarkdownLinks } from './unist'
 
 const rootDir = resolve(__dirname, '../test/fixtures/docs')
@@ -111,11 +109,9 @@ function testProcessor(process: Processor) {
     it('throws when the target file does not exist', async () => {
       const markdown = '[Link](./nonexistent.md)'
       const filePath = resolve(rootDir, 'intro.mdx')
-      await expect(
-        async () => {
-          await process({ markdown, filePath })
-        },
-      ).rejects.toThrow(/Link target not found/)
+      await expect(async () => {
+        await process({ markdown, filePath })
+      }).rejects.toThrow(/Link target not found/)
     })
   })
 
@@ -140,7 +136,7 @@ function testProcessor(process: Processor) {
   })
 }
 
-describe("unist", () => {
+describe('unist', () => {
   const process: Processor = ({ markdown, filePath }) => {
     const file = unified()
       .use(remarkParse)
@@ -156,9 +152,8 @@ describe("unist", () => {
   testProcessor(process)
 })
 
-
-describe("satteri", () => {
-  const process: Processor =async ({ markdown, filePath }) => {
+describe('satteri', () => {
+  const process: Processor = async ({ markdown, filePath }) => {
     const result = await markdownToHtml(markdown, {
       filename: filePath,
       hastPlugins: [satteriResolveMarkdownLinks({ rootDir })],

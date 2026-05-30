@@ -29,13 +29,11 @@ export function satteriResolveMarkdownLinks(
         const [filePath, suffix] = splitHref(href)
         if (!isRelativeMdLink(filePath)) return
 
-
         const currentFile = ctx.filename
 
         // satteri defaults to "<unknown>" when no filename is provided
         // https://github.com/bruits/satteri/blob/8d84807fe572950f47f0017f68a3b753dd9e90c3/packages/satteri/src/compile.ts#L494
-        if (!currentFile || currentFile === "<unknown>") return
-
+        if (!currentFile || currentFile === '<unknown>') return
 
         const currentDir = dirname(currentFile)
 
