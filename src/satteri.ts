@@ -29,7 +29,6 @@ export function satteriResolveMarkdownLinks(
         const [filePath, suffix] = splitHref(href)
         if (!isRelativeMdLink(filePath)) return
 
-        console.log("ctx.filename", ctx.filename)
 
         const currentFile = ctx.filename
 
