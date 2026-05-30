@@ -6,7 +6,7 @@ import remarkRehype from 'remark-rehype'
 import { unified } from 'unified'
 import { describe, expect, it } from 'vitest'
 
-import { rehypeResolveMarkdownLinks } from './index'
+import { rehypeResolveMarkdownLinks } from './unist'
 
 const rootDir = resolve(__dirname, '../test/fixtures/docs')
 
