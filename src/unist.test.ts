@@ -30,107 +30,107 @@ const process: Process = ({ markdown, filePath }) => {
 
 describe('rehypeResolveMarkdownLinks', () => {
   describe('basic transforms', () => {
-    it('resolves a same-directory relative link', () => {
+    it('resolves a same-directory relative link', async () => {
       const markdown = '[Quick Start](./quick-start.md)'
       const filePath = resolve(rootDir, 'getting-started/quick-start.md')
-      const result = process({ markdown, filePath })
+      const result = await process({ markdown, filePath })
       expect(result).toBe(
         '<p><a href="/getting-started/quick-start">Quick Start</a></p>',
       )
     })
 
-    it('resolves a parent-directory relative link', () => {
+    it('resolves a parent-directory relative link', async () => {
       const markdown = '[Button](../web/button.md)'
       const filePath = resolve(rootDir, 'references/react/button.md')
-      const result = process({ markdown, filePath })
+      const result = await process({ markdown, filePath })
       expect(result).toBe('<p><a href="/references/web/button">Button</a></p>')
     })
 
-    it('resolves a .mdx file', () => {
+    it('resolves a .mdx file', async () => {
       const markdown = '[Intro](../intro.mdx)'
       const filePath = resolve(rootDir, 'getting-started/quick-start.md')
-      const result = process({ markdown, filePath })
+      const result = await process({ markdown, filePath })
       expect(result).toBe('<p><a href="/intro">Intro</a></p>')
     })
 
-    it('resolves a deeply nested link', () => {
+    it('resolves a deeply nested link', async () => {
       const markdown = '[Core](../references/core.md)'
       const filePath = resolve(rootDir, 'getting-started/quick-start.md')
-      const result = process({ markdown, filePath })
+      const result = await process({ markdown, filePath })
       expect(result).toBe('<p><a href="/references/core">Core</a></p>')
     })
   })
 
   describe('preserves query and fragment', () => {
-    it('preserves a hash fragment', () => {
+    it('preserves a hash fragment', async () => {
       const markdown = '[Intro](../intro.mdx#section)'
       const filePath = resolve(rootDir, 'getting-started/quick-start.md')
-      const result = process({ markdown, filePath })
+      const result = await process({ markdown, filePath })
       expect(result).toBe('<p><a href="/intro#section">Intro</a></p>')
     })
 
-    it('preserves a query string', () => {
+    it('preserves a query string', async () => {
       const markdown = '[Intro](../intro.mdx?foo=bar)'
       const filePath = resolve(rootDir, 'getting-started/quick-start.md')
-      const result = process({ markdown, filePath })
+      const result = await process({ markdown, filePath })
       expect(result).toBe('<p><a href="/intro?foo=bar">Intro</a></p>')
     })
 
-    it('preserves both query string and hash fragment', () => {
+    it('preserves both query string and hash fragment', async () => {
       const markdown = '[Intro](../intro.mdx?a=1#b)'
       const filePath = resolve(rootDir, 'getting-started/quick-start.md')
-      const result = process({ markdown, filePath })
+      const result = await process({ markdown, filePath })
       expect(result).toBe('<p><a href="/intro?a=1#b">Intro</a></p>')
     })
   })
 
   describe('skips non-matching links', () => {
-    it('skips absolute URLs', () => {
+    it('skips absolute URLs', async () => {
       const markdown = '[Link](https://example.com/page.md)'
       const filePath = resolve(rootDir, 'intro.mdx')
-      const result = process({ markdown, filePath })
+      const result = await process({ markdown, filePath })
       expect(result).toBe(
         '<p><a href="https://example.com/page.md">Link</a></p>',
       )
     })
 
-    it('skips absolute file paths', () => {
+    it('skips absolute file paths', async () => {
       const markdown = '[Link](/absolute/page.md)'
       const filePath = resolve(rootDir, 'intro.mdx')
-      const result = process({ markdown, filePath })
+      const result = await process({ markdown, filePath })
       expect(result).toBe('<p><a href="/absolute/page.md">Link</a></p>')
     })
 
-    it('skips non-markdown links', () => {
+    it('skips non-markdown links', async () => {
       const markdown = '[Link](./page.html)'
       const filePath = resolve(rootDir, 'intro.mdx')
-      const result = process({ markdown, filePath })
+      const result = await process({ markdown, filePath })
       expect(result).toBe('<p><a href="./page.html">Link</a></p>')
     })
 
-    it('skips fragment-only links', () => {
+    it('skips fragment-only links', async () => {
       const markdown = '[Link](#section)'
       const filePath = resolve(rootDir, 'intro.mdx')
-      const result = process({ markdown, filePath })
+      const result = await process({ markdown, filePath })
       expect(result).toBe('<p><a href="#section">Link</a></p>')
     })
   })
 
   describe('error handling', () => {
-    it('throws when the target file does not exist', () => {
+    it('throws when the target file does not exist', async () => {
       const markdown = '[Link](./nonexistent.md)'
       const filePath = resolve(rootDir, 'intro.mdx')
-      expect(() => process({ markdown, filePath })).toThrow(
-        /Link target not found/,
-      )
+      await expect(
+        (async () => await process({ markdown, filePath }))(),
+      ).rejects.toThrow(/Link target not found/)
     })
   })
 
   describe('URL encoding', () => {
-    it('decodes percent-encoded paths', () => {
+    it('decodes percent-encoded paths', async () => {
       const markdown = '[Link](./getting-started/quick-start.md)'
       const filePath = resolve(rootDir, 'intro.mdx')
-      const result = process({ markdown, filePath })
+      const result = await process({ markdown, filePath })
       expect(result).toBe(
         '<p><a href="/getting-started/quick-start">Link</a></p>',
       )
@@ -138,10 +138,10 @@ describe('rehypeResolveMarkdownLinks', () => {
   })
 
   describe('edge cases', () => {
-    it('handles a file with file path', () => {
+    it('handles a file with file path', async () => {
       const markdown = '[Link](./intro.mdx)'
       const filePath = undefined
-      const result = process({ markdown, filePath })
+      const result = await process({ markdown, filePath })
       expect(result).toBe('<p><a href="./intro.mdx">Link</a></p>')
     })
   })
