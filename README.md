@@ -49,8 +49,19 @@ const file = await unified()
   .use(remarkRehype)
   .use(rehypeResolveMarkdownLinks, { rootDir: './content' })
   .use(rehypeStringify)
-  .process(markdown)
+  .process(markdownString)
 ```
+
+## Usage with [Sätteri](https://github.com/bruits/satteri)
+
+```js
+import { satteriResolveMarkdownLinks } from 'rehype-resolve-markdown-links/satteri'
+import { markdownToHtml } from 'satteri'
+
+const result = await markdownToHtml(markdown, {
+  hastPlugins: [satteriResolveMarkdownLinks({ rootDir: "./content" })],
+})
+````
 
 ## Options
 
