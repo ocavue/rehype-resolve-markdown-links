@@ -45,7 +45,7 @@
     "vfile": "^6.0.3"
   },
   "peerDependencies": {
-    "satteri": "^0.6.3"
+    "satteri": "^0.7.0"
   },
   "peerDependenciesMeta": {
     "satteri": {
