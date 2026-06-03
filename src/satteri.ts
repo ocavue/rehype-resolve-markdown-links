@@ -1,5 +1,6 @@
 import { existsSync } from 'node:fs'
 import { dirname, relative, resolve } from 'node:path'
+import { fileURLToPath } from 'node:url'
 
 import type { HastPluginDefinition } from 'satteri'
 import slash from 'slash'
@@ -29,12 +30,10 @@ export function satteriResolveMarkdownLinks(
         const [filePath, suffix] = splitHref(href)
         if (!isRelativeMdLink(filePath)) return
 
-        const currentFile = ctx.filename
+        const fileURL = ctx.fileURL
+        if (!fileURL) return
 
-        // satteri defaults to "<unknown>" when no filename is provided
-        // https://github.com/bruits/satteri/blob/8d84807fe572950f47f0017f68a3b753dd9e90c3/packages/satteri/src/compile.ts#L494
-        if (!currentFile || currentFile === '<unknown>') return
-
+        const currentFile = fileURLToPath(fileURL)
         const currentDir = dirname(currentFile)
 
         const targetAbsPath = resolve(currentDir, filePath)

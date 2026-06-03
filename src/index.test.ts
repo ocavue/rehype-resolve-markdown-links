@@ -1,4 +1,5 @@
 import { resolve } from 'node:path'
+import { pathToFileURL } from 'node:url'
 
 import rehypeStringify from 'rehype-stringify'
 import remarkParse from 'remark-parse'
@@ -155,7 +156,7 @@ describe('unist', () => {
 describe('satteri', () => {
   const process: Processor = async ({ markdown, filePath }) => {
     const result = await markdownToHtml(markdown, {
-      filename: filePath,
+      fileURL: filePath ? pathToFileURL(filePath) : undefined,
       hastPlugins: [satteriResolveMarkdownLinks({ rootDir })],
     })
     return result.html.trimEnd()
