@@ -26,19 +26,19 @@
     }
   },
   "devDependencies": {
-    "unified": "^11.0.5",
-    "rehype-resolve-markdown-links": "workspace:*",
     "@ocavue/eslint-config": "^4.5.9",
     "@ocavue/tsconfig": "^0.7.1",
     "@types/node": "^22.19.11",
     "eslint": "^10.4.0",
     "prettier": "^3.8.1",
     "rehype-parse": "^9.0.1",
+    "rehype-resolve-markdown-links": "workspace:*",
     "rehype-stringify": "^10.0.1",
     "remark-parse": "^11.0.0",
     "remark-rehype": "^11.1.2",
     "satteri": "^0.7.0",
     "typescript": "^6.0.3",
+    "unified": "^11.0.5",
     "vite": "^8.0.10",
     "vitest": "^4.1.7"
   }
