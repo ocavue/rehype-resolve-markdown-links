@@ -51,10 +51,6 @@
   "devDependencies": {
     "@ocavue/tsconfig": "^0.7.1",
     "@types/node": "^22.19.11",
-    "rehype-parse": "^9.0.1",
-    "rehype-stringify": "^10.0.1",
-    "remark-parse": "^11.0.0",
-    "remark-rehype": "^11.1.2",
     "satteri": "^0.7.0",
     "tsdown": "^0.22.1",
     "typescript": "^6.0.3"
