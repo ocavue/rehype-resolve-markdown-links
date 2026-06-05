@@ -4,6 +4,8 @@
 
 A [rehype](https://github.com/rehypejs/rehype) plugin that resolves relative markdown links into absolute URL paths.
 
+Relative `.md` / `.mdx` links are rewritten to root-absolute, extension-less URLs; `#hash` and `?query` suffixes are kept, and a link to a missing file throws. Absolute URLs, absolute paths, and non-markdown links are left untouched.
+
 ## Example
 
 Given this file structure:
@@ -49,18 +51,8 @@ const file = await unified()
   .use(remarkRehype)
   .use(rehypeResolveMarkdownLinks, { rootDir: './content' })
   .use(rehypeStringify)
-  .process(markdownString)
-```
-
-## Usage with [Sätteri](https://github.com/bruits/satteri)
-
-```js
-import { satteriResolveMarkdownLinks } from 'rehype-resolve-markdown-links/satteri'
-import { markdownToHtml } from 'satteri'
-
-const result = await markdownToHtml(markdown, {
-  hastPlugins: [satteriResolveMarkdownLinks({ rootDir: './content' })],
-})
+  // The file's `path` is required — links are resolved relative to it.
+  .process({ path: 'content/references/react/button.md', value: markdown })
 ```
 
 ## Options
@@ -68,6 +60,10 @@ const result = await markdownToHtml(markdown, {
 ### `rootDir`
 
 **Required.** The root directory of your content files. Output links are generated relative to this directory.
+
+## Related
+
+Using [Sätteri](https://github.com/bruits/satteri) instead of rehype? Use [`satteri-resolve-markdown-links`](https://www.npmjs.com/package/satteri-resolve-markdown-links), which provides the same behavior for Sätteri's plugin API.
 
 ## Sponsors
 
