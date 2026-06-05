@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.1](https://github.com/ocavue/rehype-resolve-markdown-links/compare/rehype-resolve-markdown-links-v0.4.0...rehype-resolve-markdown-links-v0.4.1) (2026-06-05)
+
+
+### Bug Fixes
+
+* npm publish skipped in manifest mode ([87132f2](https://github.com/ocavue/rehype-resolve-markdown-links/commit/87132f258bce6788eaebce5166a5729171b34e33))
+
 ## [0.4.0](https://github.com/ocavue/rehype-resolve-markdown-links/compare/rehype-resolve-markdown-links-v0.3.0...rehype-resolve-markdown-links-v0.4.0) (2026-06-05)
 
 

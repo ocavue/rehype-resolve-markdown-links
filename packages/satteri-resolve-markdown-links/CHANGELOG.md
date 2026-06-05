@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.1](https://github.com/ocavue/rehype-resolve-markdown-links/compare/satteri-resolve-markdown-links-v0.1.0...satteri-resolve-markdown-links-v0.1.1) (2026-06-05)
+
+
+### Bug Fixes
+
+* npm publish skipped in manifest mode ([87132f2](https://github.com/ocavue/rehype-resolve-markdown-links/commit/87132f258bce6788eaebce5166a5729171b34e33))
+
 ## [0.1.0](https://github.com/ocavue/rehype-resolve-markdown-links/compare/satteri-resolve-markdown-links-v0.0.1...satteri-resolve-markdown-links-v0.1.0) (2026-06-05)
 
 
