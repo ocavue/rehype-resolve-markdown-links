@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.2](https://github.com/ocavue/rehype-resolve-markdown-links/compare/satteri-resolve-markdown-links-v0.1.1...satteri-resolve-markdown-links-v0.1.2) (2026-06-05)
+
+
+### Bug Fixes
+
+* support satteri v0.8.0 ([#23](https://github.com/ocavue/rehype-resolve-markdown-links/issues/23)) ([77382f2](https://github.com/ocavue/rehype-resolve-markdown-links/commit/77382f2caec330ab0c01e3e8f6d5e6f6e8585bf8))
+
 ## [0.1.1](https://github.com/ocavue/rehype-resolve-markdown-links/compare/satteri-resolve-markdown-links-v0.1.0...satteri-resolve-markdown-links-v0.1.1) (2026-06-05)
 
 
