@@ -1,3 +1,11 @@
+
+
 {
-  "extends": "@ocavue/tsconfig/dom/app.json"
+  "extends": "@ocavue/tsconfig/dom/app.json",
+  "include": [
+    "./*.js", "./test",
+  ],
+  "references": [
+    {"path": "./packages/rehype-resolve-markdown-links/tsconfig.json"}
+  ]
 }

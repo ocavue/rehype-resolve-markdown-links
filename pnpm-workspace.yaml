@@ -1,6 +1,8 @@
 allowBuilds:
   esbuild: false
 ignoreWorkspaceRootCheck: true
+packages:
+  - "./packages/*"
 minimumReleaseAgeExclude:
   - '@bruits/satteri-darwin-arm64@0.7.0'
   - '@bruits/satteri-darwin-x64@0.7.0'

@@ -8,8 +8,8 @@ import { markdownToHtml } from 'satteri'
 import { unified } from 'unified'
 import { describe, expect, it } from 'vitest'
 
-import { satteriResolveMarkdownLinks } from './satteri'
-import { rehypeResolveMarkdownLinks } from './unist'
+import { satteriResolveMarkdownLinks } from 'rehype-resolve-markdown-links/satteri'
+import { rehypeResolveMarkdownLinks } from 'rehype-resolve-markdown-links/unist'
 
 const rootDir = resolve(__dirname, '../test/fixtures/docs')
 

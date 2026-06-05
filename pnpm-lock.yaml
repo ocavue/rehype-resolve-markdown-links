@@ -51,6 +51,52 @@ importers:
       satteri:
         specifier: ^0.7.0
         version: 0.7.0
+      typescript:
+        specifier: ^6.0.3
+        version: 6.0.3
+      vite:
+        specifier: ^8.0.10
+        version: 8.0.16(@types/node@22.19.19)(jiti@2.7.0)
+      vitest:
+        specifier: ^4.1.7
+        version: 4.1.8(@types/node@22.19.19)(vite@8.0.16(@types/node@22.19.19)(jiti@2.7.0))
+
+  packages/rehype-resolve-markdown-links:
+    dependencies:
+      '@types/hast':
+        specifier: ^3.0.4
+        version: 3.0.4
+      slash:
+        specifier: ^5.1.0
+        version: 5.1.0
+      unist-util-visit:
+        specifier: ^5.1.0
+        version: 5.1.0
+      vfile:
+        specifier: ^6.0.3
+        version: 6.0.3
+    devDependencies:
+      '@ocavue/tsconfig':
+        specifier: ^0.7.1
+        version: 0.7.1
+      '@types/node':
+        specifier: ^22.19.11
+        version: 22.19.19
+      rehype-parse:
+        specifier: ^9.0.1
+        version: 9.0.1
+      rehype-stringify:
+        specifier: ^10.0.1
+        version: 10.0.1
+      remark-parse:
+        specifier: ^11.0.0
+        version: 11.0.0
+      remark-rehype:
+        specifier: ^11.1.2
+        version: 11.1.2
+      satteri:
+        specifier: ^0.7.0
+        version: 0.7.0
       tsdown:
         specifier: ^0.22.1
         version: 0.22.1(typescript@6.0.3)
@@ -60,12 +106,6 @@ importers:
       unified:
         specifier: ^11.0.5
         version: 11.0.5
-      vite:
-        specifier: ^8.0.10
-        version: 8.0.16(@types/node@22.19.19)(jiti@2.7.0)
-      vitest:
-        specifier: ^4.1.7
-        version: 4.1.8(@types/node@22.19.19)(vite@8.0.16(@types/node@22.19.19)(jiti@2.7.0))
 
 packages:
 

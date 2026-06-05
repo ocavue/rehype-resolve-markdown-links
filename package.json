@@ -1,38 +1,11 @@
 {
-  "name": "rehype-resolve-markdown-links",
+  "name": "rehype-resolve-markdown-links-monorepo",
   "type": "module",
-  "version": "0.3.0",
+  "private": true,
+  "version": "0.0.0",
   "packageManager": "pnpm@11.5.0",
-  "description": "A rehype plugin to resolve markdown links to absolute paths",
-  "author": "ocavue <ocavue@gmail.com>",
-  "license": "MIT",
-  "funding": "https://github.com/sponsors/ocavue",
-  "homepage": "https://github.com/ocavue/rehype-resolve-markdown-links#readme",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/ocavue/rehype-resolve-markdown-links.git"
-  },
-  "bugs": "https://github.com/ocavue/rehype-resolve-markdown-links/issues",
-  "keywords": [],
-  "sideEffects": false,
-  "main": "./dist/index.js",
-  "module": "./dist/index.js",
-  "types": "./dist/index.d.ts",
-  "exports": {
-    ".": {
-      "default": "./dist/index.js"
-    },
-    "./satteri": {
-      "default": "./dist/satteri.js"
-    }
-  },
-  "files": [
-    "dist",
-    "src"
-  ],
   "scripts": {
-    "build": "tsdown",
-    "dev": "tsdown --watch",
+    "build": "pnpm -r build",
     "lint": "eslint .",
     "fix": "eslint --fix . && prettier --write .",
     "test": "vitest",
@@ -63,9 +36,7 @@
     "remark-parse": "^11.0.0",
     "remark-rehype": "^11.1.2",
     "satteri": "^0.7.0",
-    "tsdown": "^0.22.1",
     "typescript": "^6.0.3",
-    "unified": "^11.0.5",
     "vite": "^8.0.10",
     "vitest": "^4.1.7"
   }

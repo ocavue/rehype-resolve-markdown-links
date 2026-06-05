@@ -1,0 +1,61 @@
+{
+  "name": "rehype-resolve-markdown-links",
+  "type": "module",
+  "version": "0.3.0",
+  "description": "A rehype plugin to resolve markdown links to absolute paths",
+  "author": "ocavue <ocavue@gmail.com>",
+  "license": "MIT",
+  "funding": "https://github.com/sponsors/ocavue",
+  "homepage": "https://github.com/ocavue/rehype-resolve-markdown-links#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ocavue/rehype-resolve-markdown-links.git"
+  },
+  "bugs": "https://github.com/ocavue/rehype-resolve-markdown-links/issues",
+  "keywords": [],
+  "sideEffects": false,
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "default": "./dist/index.js"
+    },
+    "./satteri": {
+      "default": "./dist/satteri.js"
+    }
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "scripts": {
+    "build": "tsdown"
+  },
+  "dependencies": {
+    "@types/hast": "^3.0.4",
+    "slash": "^5.1.0",
+    "unist-util-visit": "^5.1.0",
+    "vfile": "^6.0.3"
+  },
+  "peerDependencies": {
+    "satteri": "^0.7.0"
+  },
+  "peerDependenciesMeta": {
+    "satteri": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@ocavue/tsconfig": "^0.7.1",
+    "@types/node": "^22.19.11",
+    "rehype-parse": "^9.0.1",
+    "rehype-stringify": "^10.0.1",
+    "remark-parse": "^11.0.0",
+    "remark-rehype": "^11.1.2",
+    "satteri": "^0.7.0",
+    "tsdown": "^0.22.1",
+    "typescript": "^6.0.3",
+    "unified": "^11.0.5"
+  }
+}
