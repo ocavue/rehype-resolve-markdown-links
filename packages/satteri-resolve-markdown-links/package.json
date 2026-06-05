@@ -1,7 +1,7 @@
 {
   "name": "satteri-resolve-markdown-links",
   "type": "module",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A satteri plugin to resolve markdown links to absolute paths",
   "author": "ocavue <ocavue@gmail.com>",
   "license": "MIT",
