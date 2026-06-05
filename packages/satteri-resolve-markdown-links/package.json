@@ -21,10 +21,6 @@
     ".": {
       "satteri-resolve-markdown-links": "./src/index.ts",
       "default": "./dist/index.js"
-    },
-    "./satteri": {
-      "satteri-resolve-markdown-links": "./src/satteri.ts",
-      "default": "./dist/satteri.js"
     }
   },
   "files": [
