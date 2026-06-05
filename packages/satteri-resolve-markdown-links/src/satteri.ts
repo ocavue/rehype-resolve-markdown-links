@@ -14,9 +14,7 @@ export interface Options {
   rootDir: string
 }
 
-export function satteriResolveMarkdownLinks(
-  options: Options,
-): HastPluginDefinition {
+export function satteriResolveMarkdownLinks(options: Options): HastPluginDefinition {
   const rootDir = resolve(options.rootDir)
 
   const plugin: HastPluginDefinition = {
