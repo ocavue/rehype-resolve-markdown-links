@@ -23,9 +23,7 @@ function testProcessor(process: Processor) {
       const markdown = '[Quick Start](./quick-start.md)'
       const filePath = resolve(rootDir, 'getting-started/quick-start.md')
       const result = await process({ markdown, filePath })
-      expect(result).toBe(
-        '<p><a href="/getting-started/quick-start">Quick Start</a></p>',
-      )
+      expect(result).toBe('<p><a href="/getting-started/quick-start">Quick Start</a></p>')
     })
 
     it('resolves a parent-directory relative link', async () => {
@@ -78,9 +76,7 @@ function testProcessor(process: Processor) {
       const markdown = '[Link](https://example.com/page.md)'
       const filePath = resolve(rootDir, 'intro.mdx')
       const result = await process({ markdown, filePath })
-      expect(result).toBe(
-        '<p><a href="https://example.com/page.md">Link</a></p>',
-      )
+      expect(result).toBe('<p><a href="https://example.com/page.md">Link</a></p>')
     })
 
     it('skips absolute file paths', async () => {
@@ -120,9 +116,7 @@ function testProcessor(process: Processor) {
       const markdown = '[Link](./getting-started/quick-start.md)'
       const filePath = resolve(rootDir, 'intro.mdx')
       const result = await process({ markdown, filePath })
-      expect(result).toBe(
-        '<p><a href="/getting-started/quick-start">Link</a></p>',
-      )
+      expect(result).toBe('<p><a href="/getting-started/quick-start">Link</a></p>')
     })
   })
 

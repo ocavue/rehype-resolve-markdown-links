@@ -15,9 +15,7 @@ export interface Options {
   rootDir: string
 }
 
-export function rehypeResolveMarkdownLinks(
-  options: Options,
-): (tree: Root, file: VFile) => void {
+export function rehypeResolveMarkdownLinks(options: Options): (tree: Root, file: VFile) => void {
   const rootDir = resolve(options.rootDir)
 
   return (tree: Root, file: VFile) => {
