@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.0](https://github.com/ocavue/rehype-resolve-markdown-links/compare/rehype-resolve-markdown-links-v0.3.0...rehype-resolve-markdown-links-v0.4.0) (2026-06-05)
+
+
+### Features
+
+* split into separate rehype and satteri packages ([#16](https://github.com/ocavue/rehype-resolve-markdown-links/issues/16)) ([e3227a5](https://github.com/ocavue/rehype-resolve-markdown-links/commit/e3227a5fcf1bf0b3c300ae4422b1cf23259cea3f))
+
 ## [0.3.0](https://github.com/ocavue/rehype-resolve-markdown-links/compare/v0.2.0...v0.3.0) (2026-06-03)
 
 
