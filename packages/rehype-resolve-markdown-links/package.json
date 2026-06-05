@@ -14,8 +14,8 @@
   },
   "bugs": "https://github.com/ocavue/rehype-resolve-markdown-links/issues",
   "keywords": [
-    "rehype",
     "unified",
+    "rehype",
     "remark",
     "markdown",
     "mdx",

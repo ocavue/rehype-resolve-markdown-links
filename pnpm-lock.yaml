@@ -18,13 +18,13 @@ importers:
         specifier: ^22.19.11
         version: 22.19.19
       eslint:
-        specifier: ^10.4.0
+        specifier: ^10.4.1
         version: 10.4.1(jiti@2.7.0)
       knip:
         specifier: ^6.15.0
         version: 6.15.0
       prettier:
-        specifier: ^3.8.1
+        specifier: ^3.8.3
         version: 3.8.3
       rehype-resolve-markdown-links:
         specifier: workspace:*

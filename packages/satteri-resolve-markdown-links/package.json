@@ -14,8 +14,8 @@
   },
   "bugs": "https://github.com/ocavue/rehype-resolve-markdown-links/issues",
   "keywords": [
-    "satteri",
     "markdown",
+    "satteri",
     "mdx",
     "links",
     "hast"
