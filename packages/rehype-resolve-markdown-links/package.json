@@ -1,0 +1,54 @@
+{
+  "name": "rehype-resolve-markdown-links",
+  "type": "module",
+  "version": "0.3.0",
+  "description": "A rehype plugin to resolve markdown links to absolute paths",
+  "author": "ocavue <ocavue@gmail.com>",
+  "license": "MIT",
+  "funding": "https://github.com/sponsors/ocavue",
+  "homepage": "https://github.com/ocavue/rehype-resolve-markdown-links#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ocavue/rehype-resolve-markdown-links.git",
+    "directory": "packages/rehype-resolve-markdown-links"
+  },
+  "bugs": "https://github.com/ocavue/rehype-resolve-markdown-links/issues",
+  "keywords": [
+    "rehype",
+    "unified",
+    "remark",
+    "markdown",
+    "mdx",
+    "links",
+    "hast"
+  ],
+  "sideEffects": false,
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "rehype-resolve-markdown-links": "./src/index.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "scripts": {
+    "build": "tsdown"
+  },
+  "dependencies": {
+    "@types/hast": "^3.0.4",
+    "slash": "^5.1.0",
+    "unist-util-visit": "^5.1.0",
+    "vfile": "^6.0.3"
+  },
+  "devDependencies": {
+    "@ocavue/tsconfig": "^0.7.1",
+    "@types/node": "^22.19.11",
+    "tsdown": "^0.22.1",
+    "typescript": "^6.0.3"
+  }
+}

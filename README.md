@@ -1,73 +1,22 @@
-# rehype-resolve-markdown-links
+# resolve-markdown-links
 
-[![NPM version](https://img.shields.io/npm/v/rehype-resolve-markdown-links?color=a1b858&label=)](https://www.npmjs.com/package/rehype-resolve-markdown-links)
+Resolve relative markdown links (`./other.md`) into absolute URL paths (`/other`).
 
-A [rehype](https://github.com/rehypejs/rehype) plugin that resolves relative markdown links into absolute URL paths.
+When you author docs as markdown files that link to each other on disk, those
+links break once the files are rendered to a website. These plugins rewrite each
+relative `.md` / `.mdx` link to the clean, root-absolute URL the page will live
+at — preserving `#hash` and `?query` suffixes, and throwing if a link points at a
+file that doesn't exist.
 
-## Example
+The same logic ships for two markdown toolchains. Pick the package that matches
+your engine; both share a single `rootDir` option and produce identical output.
 
-Given this file structure:
+## Packages
 
-```
-content/
-  getting-started/
-    intro.mdx
-    quick-start.md
-  references/
-    core.md
-    react/
-      button.md
-    web/
-      button.md
-```
-
-And this configuration with `rootDir: './content'`:
-
-| Source file                      | Markdown                         | HTML output                                       |
-| -------------------------------- | -------------------------------- | ------------------------------------------------- |
-| `references/react/button.md`     | `[Web Button](../web/button.md)` | `<a href="/references/web/button">Web Button</a>` |
-| `references/react/button.md`     | `[Editor](../core.md#editor)`    | `<a href="/references/core#editor">Editor</a>`    |
-| `getting-started/quick-start.md` | `[Intro](./intro.mdx)`           | `<a href="/getting-started/intro">Intro</a>`      |
-
-## Install
-
-```bash
-npm install rehype-resolve-markdown-links
-```
-
-## Usage
-
-```js
-import { rehypeResolveMarkdownLinks } from 'rehype-resolve-markdown-links'
-import rehypeStringify from 'rehype-stringify'
-import remarkParse from 'remark-parse'
-import remarkRehype from 'remark-rehype'
-import { unified } from 'unified'
-
-const file = await unified()
-  .use(remarkParse)
-  .use(remarkRehype)
-  .use(rehypeResolveMarkdownLinks, { rootDir: './content' })
-  .use(rehypeStringify)
-  .process(markdownString)
-```
-
-## Usage with [Sätteri](https://github.com/bruits/satteri)
-
-```js
-import { satteriResolveMarkdownLinks } from 'rehype-resolve-markdown-links/satteri'
-import { markdownToHtml } from 'satteri'
-
-const result = await markdownToHtml(markdown, {
-  hastPlugins: [satteriResolveMarkdownLinks({ rootDir: './content' })],
-})
-```
-
-## Options
-
-### `rootDir`
-
-**Required.** The root directory of your content files. Output links are generated relative to this directory.
+| Package                                                                       | For                                                                                                      | npm                                                                                                                                                             |
+| ----------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [`rehype-resolve-markdown-links`](./packages/rehype-resolve-markdown-links)   | [rehype](https://github.com/rehypejs/rehype) / [unified](https://github.com/unifiedjs/unified) pipelines | [![NPM version](https://img.shields.io/npm/v/rehype-resolve-markdown-links?color=a1b858&label=)](https://www.npmjs.com/package/rehype-resolve-markdown-links)   |
+| [`satteri-resolve-markdown-links`](./packages/satteri-resolve-markdown-links) | [Sätteri](https://github.com/bruits/satteri)                                                             | [![NPM version](https://img.shields.io/npm/v/satteri-resolve-markdown-links?color=a1b858&label=)](https://www.npmjs.com/package/satteri-resolve-markdown-links) |
 
 ## Sponsors
 

@@ -1,48 +1,19 @@
 {
-  "name": "rehype-resolve-markdown-links",
+  "name": "rehype-resolve-markdown-links-monorepo",
   "type": "module",
-  "version": "0.3.0",
+  "version": "0.0.0",
+  "private": true,
   "packageManager": "pnpm@11.5.0",
-  "description": "A rehype plugin to resolve markdown links to absolute paths",
-  "author": "ocavue <ocavue@gmail.com>",
-  "license": "MIT",
-  "funding": "https://github.com/sponsors/ocavue",
-  "homepage": "https://github.com/ocavue/rehype-resolve-markdown-links#readme",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/ocavue/rehype-resolve-markdown-links.git"
-  },
-  "bugs": "https://github.com/ocavue/rehype-resolve-markdown-links/issues",
-  "keywords": [],
-  "sideEffects": false,
-  "main": "./dist/index.js",
-  "module": "./dist/index.js",
-  "types": "./dist/index.d.ts",
-  "exports": {
-    ".": {
-      "default": "./dist/index.js"
-    },
-    "./satteri": {
-      "default": "./dist/satteri.js"
-    }
-  },
-  "files": [
-    "dist",
-    "src"
-  ],
   "scripts": {
-    "build": "tsdown",
-    "dev": "tsdown --watch",
-    "lint": "eslint .",
-    "fix": "eslint --fix . && prettier --write .",
+    "build": "pnpm -r build",
+    "lint": "pnpm run lint:eslint && pnpm run lint:knip",
+    "lint:eslint": "eslint",
+    "lint:knip": "knip",
+    "fix": "pnpm run fix:prettier && pnpm run fix:eslint",
+    "fix:eslint": "eslint --fix .",
+    "fix:prettier": "prettier --write .",
     "test": "vitest",
     "typecheck": "tsc -b"
-  },
-  "dependencies": {
-    "@types/hast": "^3.0.4",
-    "slash": "^5.1.0",
-    "unist-util-visit": "^5.1.0",
-    "vfile": "^6.0.3"
   },
   "peerDependencies": {
     "satteri": "^0.7.0"
@@ -57,13 +28,14 @@
     "@ocavue/tsconfig": "^0.7.1",
     "@types/node": "^22.19.11",
     "eslint": "^10.4.0",
+    "knip": "^6.15.0",
     "prettier": "^3.8.1",
-    "rehype-parse": "^9.0.1",
+    "rehype-resolve-markdown-links": "workspace:*",
     "rehype-stringify": "^10.0.1",
     "remark-parse": "^11.0.0",
     "remark-rehype": "^11.1.2",
     "satteri": "^0.7.0",
-    "tsdown": "^0.22.1",
+    "satteri-resolve-markdown-links": "workspace:*",
     "typescript": "^6.0.3",
     "unified": "^11.0.5",
     "vite": "^8.0.10",

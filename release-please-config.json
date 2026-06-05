@@ -1,0 +1,13 @@
+{
+  "$schema": "https://raw.githubusercontent.com/googleapis/release-please/v17.7.0/schemas/config.json",
+  "bump-minor-pre-major": true,
+  "packages": {
+    "packages/rehype-resolve-markdown-links": {},
+    "packages/satteri-resolve-markdown-links": {}
+  },
+  "plugins": [
+    {
+      "type": "node-workspace"
+    }
+  ]
+}

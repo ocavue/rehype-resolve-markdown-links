@@ -1,15 +1,14 @@
 import { resolve } from 'node:path'
 import { pathToFileURL } from 'node:url'
 
+import { rehypeResolveMarkdownLinks } from 'rehype-resolve-markdown-links'
 import rehypeStringify from 'rehype-stringify'
 import remarkParse from 'remark-parse'
 import remarkRehype from 'remark-rehype'
 import { markdownToHtml } from 'satteri'
+import { satteriResolveMarkdownLinks } from 'satteri-resolve-markdown-links'
 import { unified } from 'unified'
 import { describe, expect, it } from 'vitest'
-
-import { satteriResolveMarkdownLinks } from './satteri'
-import { rehypeResolveMarkdownLinks } from './unist'
 
 const rootDir = resolve(__dirname, '../test/fixtures/docs')
 

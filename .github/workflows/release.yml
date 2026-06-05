@@ -11,8 +11,6 @@ jobs:
     steps:
       - uses: googleapis/release-please-action@45996ed1f6d02564a971a2fa1b5860e934307cf7 # v5.0.0
         id: release-please
-        with:
-          release-type: node
     outputs:
       release_created: ${{ steps.release-please.outputs.release_created }}
 
@@ -32,4 +30,4 @@ jobs:
         run: pnpm run build
 
       - name: Publish to NPM
-        run: pnpm publish
+        run: pnpm publish -r --no-git-checks
