@@ -1,0 +1,17 @@
+{
+  "packages": {
+    "packages/rehype-resolve-markdown-links": {
+      "release-type": "node",
+      "package-name": "rehype-resolve-markdown-links"
+    },
+    "packages/satteri-resolve-markdown-links": {
+      "release-type": "node",
+      "package-name": "satteri-resolve-markdown-links"
+    }
+  },
+  "plugins": [
+    {
+      "type": "node-workspace"
+    }
+  ]
+}
