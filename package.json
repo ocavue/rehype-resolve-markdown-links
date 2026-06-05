@@ -6,8 +6,12 @@
   "packageManager": "pnpm@11.5.0",
   "scripts": {
     "build": "pnpm -r build",
-    "lint": "eslint .",
-    "fix": "eslint --fix . && prettier --write .",
+    "lint": "pnpm run lint:eslint && pnpm run lint:knip",
+    "lint:eslint": "eslint",
+    "lint:knip": "knip",
+    "fix": "pnpm run fix:prettier && pnpm run fix:eslint",
+    "fix:eslint": "eslint --fix .",
+    "fix:prettier": "prettier --write .",
     "test": "vitest",
     "typecheck": "tsc -b"
   },
@@ -30,6 +34,7 @@
     "@ocavue/tsconfig": "^0.7.1",
     "@types/node": "^22.19.11",
     "eslint": "^10.4.0",
+    "knip": "^6.15.0",
     "prettier": "^3.8.1",
     "rehype-parse": "^9.0.1",
     "rehype-resolve-markdown-links": "workspace:*",
