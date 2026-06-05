@@ -51,8 +51,8 @@
   "devDependencies": {
     "@ocavue/tsconfig": "^0.7.1",
     "@types/node": "^22.19.11",
-    "satteri": "^0.7.0",
-    "tsdown": "^0.22.1",
+    "satteri": "^0.8.0",
+    "tsdown": "^0.22.2",
     "typescript": "^6.0.3"
   }
 }
