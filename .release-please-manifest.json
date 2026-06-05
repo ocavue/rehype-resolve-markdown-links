@@ -1,4 +1,4 @@
 {
-  "packages/rehype-resolve-markdown-links": "0.3.0",
-  "packages/satteri-resolve-markdown-links": "0.0.1"
+  "packages/rehype-resolve-markdown-links": "0.4.0",
+  "packages/satteri-resolve-markdown-links": "0.1.0"
 }
