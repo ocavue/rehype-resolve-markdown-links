@@ -2,7 +2,7 @@
   "extends": "@ocavue/tsconfig/dom/app.json",
   "include": ["./*.js", "./test"],
   "compilerOptions": {
-    "customConditions": ["rehype-resolve-markdown-links"]
+    "customConditions": ["rehype-resolve-markdown-links", "satteri-resolve-markdown-links"]
   },
   "references": [
     { "path": "./packages/rehype-resolve-markdown-links/tsconfig.json" }
