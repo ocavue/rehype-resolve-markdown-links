@@ -1,4 +1,6 @@
 {
+  "$schema": "https://raw.githubusercontent.com/googleapis/release-please/main/schemas/config.json",
+  "bump-minor-pre-major": true,
   "packages": {
     "packages/rehype-resolve-markdown-links": {
       "release-type": "node",

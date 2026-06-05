@@ -39,7 +39,7 @@ export function satteriResolveMarkdownLinks(
         const targetAbsPath = resolve(currentDir, filePath)
         if (!existsSync(targetAbsPath)) {
           throw new Error(
-            `[rehype-resolve-markdown-links] Link target not found: ${targetAbsPath} (from ${currentFile})`,
+            `[satteri-resolve-markdown-links] Link target not found: ${targetAbsPath} (from ${currentFile})`,
           )
         }
 
