@@ -29,7 +29,7 @@
     "@types/node": "^22.19.11",
     "eslint": "^10.4.0",
     "knip": "^6.15.0",
-    "prettier": "^3.8.1",
+    "prettier": "^3.8.3",
     "rehype-resolve-markdown-links": "workspace:*",
     "rehype-stringify": "^10.0.1",
     "remark-parse": "^11.0.0",
