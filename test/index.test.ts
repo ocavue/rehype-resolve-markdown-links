@@ -2,7 +2,7 @@ import { resolve } from 'node:path'
 import { pathToFileURL } from 'node:url'
 
 import { satteriResolveMarkdownLinks } from 'rehype-resolve-markdown-links/satteri'
-import { rehypeResolveMarkdownLinks } from 'rehype-resolve-markdown-links/unist'
+import { rehypeResolveMarkdownLinks } from 'rehype-resolve-markdown-links'
 import rehypeStringify from 'rehype-stringify'
 import remarkParse from 'remark-parse'
 import remarkRehype from 'remark-rehype'

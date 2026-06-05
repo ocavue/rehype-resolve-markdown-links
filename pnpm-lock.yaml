@@ -39,6 +39,9 @@ importers:
       rehype-parse:
         specifier: ^9.0.1
         version: 9.0.1
+      rehype-resolve-markdown-links:
+        specifier: workspace:*
+        version: link:packages/rehype-resolve-markdown-links
       rehype-stringify:
         specifier: ^10.0.1
         version: 10.0.1
@@ -54,6 +57,9 @@ importers:
       typescript:
         specifier: ^6.0.3
         version: 6.0.3
+      unified:
+        specifier: ^11.0.5
+        version: 11.0.5
       vite:
         specifier: ^8.0.10
         version: 8.0.16(@types/node@22.19.19)(jiti@2.7.0)
@@ -103,9 +109,6 @@ importers:
       typescript:
         specifier: ^6.0.3
         version: 6.0.3
-      unified:
-        specifier: ^11.0.5
-        version: 11.0.5
 
 packages:
 
