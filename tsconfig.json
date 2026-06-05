@@ -8,6 +8,7 @@
     ]
   },
   "references": [
-    { "path": "./packages/rehype-resolve-markdown-links/tsconfig.json" }
+    { "path": "./packages/rehype-resolve-markdown-links/tsconfig.json" },
+    { "path": "./packages/satteri-resolve-markdown-links/tsconfig.json" }
   ]
 }
